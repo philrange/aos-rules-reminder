@@ -34,7 +34,7 @@ body {
 	line-height: 30px;
 	vertical-align: middle;
 	font-size: 18px;
-	/*color: yellow;*/
+	font-variant: small-caps;
 	padding-left: 10px;
 	padding-right: 10px;
 }
