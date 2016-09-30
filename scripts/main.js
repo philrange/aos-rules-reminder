@@ -41,7 +41,7 @@ function createRules(armyListData) {
                type: "GET",
                crossDomain:true,
                cache: false,
-               url: "data/" + army.name + ".json", 
+               url: "data/" + army.name.toLowerCase() + ".json", 
                success: function (ruleData) { 
                 //build rules
                 $("#rules").empty();
