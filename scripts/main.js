@@ -78,27 +78,22 @@ function getRules (ruleData, army) {
 function getRulesForPhase (phase, ruleData, army, missing) {
 	var rulesForPhase = "<div class='phase'>" + phase + "</div>";
 
-    $.each(army.units, function (t, unit) {
-        rulesForPhase  += getRulesForUnitType(t, unit, phase, ruleData, missing);
-    });
-
-    $.each(army.heroes, function (t, unit) {
-        rulesForPhase  += getRulesForUnitType(t, unit, phase, ruleData, missing);
-    });
-
-    $.each(army.monsters, function (t, unit) {
-        rulesForPhase  += getRulesForUnitType(t, unit, phase, ruleData, missing);
-    });
-
-    $.each(army.warmachines, function (t, unit) {
-        rulesForPhase  += getRulesForUnitType(t, unit, phase, ruleData, missing);
-    });
-
-    $.each(army.battalions, function (t, unit) {
-        rulesForPhase  += getRulesForUnitType(t, unit, phase, ruleData, missing);
-    });
-
+    rulesForPhase += getRulesForEachUnit(army.units, phase, ruleData, army, missing, rulesForPhase);
+    rulesForPhase += getRulesForEachUnit(army.heroes, phase, ruleData, army, missing, rulesForPhase);
+    rulesForPhase += getRulesForEachUnit(army.monsters, phase, ruleData, army, missing, rulesForPhase);
+    rulesForPhase += getRulesForEachUnit(army.warmachines, phase, ruleData, army, missing, rulesForPhase);
+    rulesForPhase += getRulesForEachUnit(army.battalions, phase, ruleData, army, missing, rulesForPhase);
+ 
 	return rulesForPhase;
+}
+
+function getRulesForEachUnit(units, phase, ruleData, army, missing, rulesForPhase) {
+    var r = "";
+   $.each(units, function (t, unit) {
+        r += getRulesForUnitType(t, unit, phase, ruleData, missing);
+    });
+
+   return r;
 }
 
 function getRulesForUnitType (t, unit, phase, ruleData, missing) {
