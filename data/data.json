@@ -1,0 +1,8 @@
+{
+
+	"Longbeards" : { "rules" : [{ "phase" : "COMBAT", "type" : "REROLL", "value" : "save", "name" : "Gromril Shields", "text" : "This unit can create a shield wall instead of running or charging in its turn. If it does so, re-roll all failed save rolls for the unit in the combat phase until its next movement phase."}]},
+	"Dwarf Warriors" : { "rules" : [{ "phase" : "HERO", "type" : "BUFF", "value" : "to wound", "text" : "whole rule here"},
+	 { "phase" : "COMBAT", "type" : "REROLL", "value" : "to wound", "name" : "Resolute In Defence", "text" : "You can re-roll failed wound rolls of 1 when attacking with a Dwarf Warrior in your opponent’s combat phase. You can instead re-roll all failed wound rolls for a Dwarf Warrior if its unit has 20 or more models when it attacks in your opponent’s combat phase."}]},
+	"Slayers" : { "rules" : [{ "phase" : "HERO", "type" : "BUFF", "value" : "to wound", "text" : "whole rule here"}]}
+
+}

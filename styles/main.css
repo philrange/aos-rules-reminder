@@ -1,0 +1,127 @@
+
+body {
+
+	background-image: linear-gradient(140deg, #eee, #ccc);
+
+    font-family: "Roboto", sans-serif;
+}
+
+#restart {
+	display: none;
+}
+
+.phase {
+	font-size: 32px;
+	clear: both;
+	padding-top: 2px;
+	padding-bottom: 4px;
+}
+
+#rules-container {
+	padding-top: 40px;
+	clear: both;
+}
+
+.rule {
+	clear: both;
+	height: 30px;
+	padding-bottom: 6px;
+	padding-left : 40px;
+}
+
+.unit-name {
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	vertical-align: middle;
+	font-size: 18px;
+	/*color: yellow;*/
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.rule-name {
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	vertical-align: middle;
+	font-size: 12px;
+	font-weight: bold;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.icon {
+	height : 30px;
+	padding-right : 10px;
+	float: left;
+}
+
+.rounded-corners {
+	border-radius: 12px;
+}
+
+.buff {
+	background: #63c125;
+}
+
+.debuff {
+	background: #ae0000;
+}
+
+.reroll {
+	background: #4286f4;
+	/*padding-left: 30px;*/
+}
+
+.other {
+	background: #aaa;
+}
+
+.icon-img {
+	background-size: 30px;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    float: left:;
+}
+
+.buff .icon-img {
+	background-image: url("../images/buff.png");
+}
+
+.debuff .icon-img {
+	background-image: url("../images/debuff.png");
+}
+
+.reroll .icon-img {
+	background-image: url("../images/dice.png");
+}
+
+.other .icon-img {
+	background-image: url("../images/other.png");
+}
+
+.icon-text {
+	font-weight: bold;
+	/*float: left;*/
+	height: 30px;
+    /*width: 30px;*/
+    line-height: 30px;
+	vertical-align: middle;
+    display: inline;
+	/*color: white;*/
+}
+
+.description {
+	font-size: 12px;
+	float: left;
+	line-height: 30px;
+	vertical-align: middle;
+}
+
+#missing-container {
+	padding-top: 100px;
+}
