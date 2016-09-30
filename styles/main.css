@@ -13,6 +13,7 @@ body {
 	clear: both;
 	padding-top: 2px;
 	padding-bottom: 4px;
+	font-variant: small-caps;
 }
 
 #rules-container {
