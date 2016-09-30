@@ -4,45 +4,55 @@
 
 <link rel="stylesheet" href="styles/main.css">
 
-  <script src="scripts/lzString/lz-string.min.js"></script>
-  <script src="scripts/main.js"></script>
+	<script src="scripts/main.js"></script>
 
-<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+	<script src="scripts/lzString/lz-string.min.js"></script>
+	<script src="scripts/jquery-3.1.1.min.js"></script>
+	<script src="scripts/bootstrap.min.js"></script>
+
+
+	<link rel="stylesheet" href="styles/bootstrap.min.css">
+	<link rel="stylesheet" href="styles/bootstrap-theme.min.css">
 
 </head>
+
 <body>
 
+<div class="container">
 
-<div id='inputBox'>
-	<div>Paste text here</div>
-	<div><input type="text" id="text" /></div>
-	<div><button id='go' onClick="go()">Go</button></div>
+	<div id='inputBox'>
+		<div>Paste text here</div>
+		<div><input type="text" id="text" /></div>
+		<div><button id='go' onClick="go()">Go</button></div>
+	</div>
+
+	<div id='restartBox'>
+		<div><button id='restart' onClick="restart()">Restart</button></div>
+	</div>
+
+
+	<div id='rules-container'>
+		<span id="rules"></span>
+	</div>
+
+	<div id='missing-container'>
+		<span id="missing"></span>
+	</div>
+
+	<div>
+		<span id="debug"></span>
+	</div>
+
 </div>
-
-<div id='restartBox'>
-	<div><button id='restart' onClick="restart()">Restart</button></div>
-</div>
-
-
-<div id='rules-container'>
-	<span id="rules"></span>
-</div>
-
-<div id='missing-container'>
-	<span id="missing"></span>
-</div>
-
-<div>
-	<span id="debug"></span>
-</div>
-
 <script type="text/javascript">
 
 // $('#text').val('N4Ig8g5g9gTgziAXKAdgQwLYFMnmvEAGhAFcUBLAFwUQG1RyATJARmPW1wBks1GAjLABsAxgAssBYuMwAHACLDKaJAAZiAdyhlGNFgCZiGKI2E0QAZiIg+jAMLaUlVtKhxniECwBsqkAF8AXWIJGCgsGlpgkGMUd0lI6I00GAw0cXIUCKQo4gAzWDTKcig4nOiUjABPLkyAa1xrPPTi0txTdxgSEVaUa0qqplwwAHEAJQBRAGkASQA5EfkwAFkAZQDieRIUxkykVEwcTy2dveIyKkiGZkQWAFZ2Q+5SiEEdhGkxOUUhZTVNRy6VjqGImMy4Fh+Yi2BxkDxsEAiNweLwAFihICwAEcSORZLgAAQAQQAHlgCbACQAJTDYGDWODCLA9LCMADqvFkbU8xLJFJg1NpkgJAWioXCiSMpXiBDoSUq6TEmWycvyhTQvUlNlSNXqjXyLRKfU8sFM9OhOqGxzZRLGADF1v5pCQYDAsE4AApQTKUAAqVVkRxAXqgQmsXJ9tQwVFw+lU8esIhdbqcqxI-H9gdwIzZASAA');
 
+// $('#text').val('N4Ig8g5g9gTgziAXKAdgQwLYFMnmvEAGhAFcUBLAFwUQG1RyATJARmPW1wBks1GAjLABsAxgAssBYuMwAHACLDKaJAAZiAdyhlGNFgCZiGKI2E0QAZiIg+jAMLaUlVtKhxniECwBsqkAF8AXWIJGCgsGlpgkGMUd0lI6I00GAw0cXIUCKQo4gAzWDTKcig4nOiUjABPLkyAa1xrPPTi0txTdxgSEVaUa0qqplwwAHEAJQBRAGkASQA5EfkwAFkAZQDieRIUxkykVEwcTy2dveIyKkiGZkQWAFZ2Q9x5ZJg8gAIAdRSYEqkQGQYBRKFSIdQgLQ6PTg4ymITmFh+Yi2BxkDxsAFuDxeVRIkBYACOJHIslw7wAggAPLDvWDvAASmGwMGscGEWB6WEYn14sjangp1NpMAZTMk72s-DQKCyLIFYwuIneMxEpQl-kI1yQ+gAnI9OMdXh9vjBfrAENIxHJFEJlGpNI5dKwYSYzLhEf1GPZHOjXO53bjrITiaSBVSaXTGRhmaz2Zzubz+SBBRGRVHmRLiFKZZIyQqKEqVWqNlrEAAWCz6o4gF4pY0-P4WgFWoE2u1gh1Q51GV3wgOe71olyY-2eRF44Mksnh4Wi6O54hsoQcyhcnloPl9MNCyNikWS6WyvOK5WqlDq6KhcKJHtxVcEOhJSrpMSZbKP-KFNC9G82VI1epGnyFoSi3EBYFMFlkX-IZjk+ckxgAMXWDUARIU0sCcAAFKBMkoAAVKpZGrHCoCEaw+Tw2oMCoXB9FxPERHQmBMMoVYSH4QjiNwEZPgCIA');
+
 $('#text').val('N4IgIgrghgTgJgSwHYgFyiVAtgUzeaeZEAGhAiQQBcBnNAbVATjQFYB2MzXfMAd1gAzAAQB1WDAQB7GHTIBjABbYADmBwAbKlDQAGMnykU4dVACZ9ILFLibTFslDhwAwkaRU0ZhVJqfzupY4AI4QCCr4wgCCAB44wjLCABLYuDCkIDSaOPJUOHCiOFAqUiioINFxCTDJqTg1GQBGUEhI9ZEAShQI8sIAkvKlwiAAviRMLKgAHKxc2HjlADKlAOaNRfByIEqq6lo6qJaGxqYAjJbWthqmIOcZTq7u-qc+fvinACy6GSFhEeWVeKJFJYNIZLIaHJ5ApFEplCqxIE1EFpYZjCZoACcmLmPHKAEVCDBNJDZBkdlg1JptHoDO4TGhzmRLnZ3t9HM43BRnq9-LcLD9QuFIgA5Up4MgQqH5QrFUqi8XDMjNVrtAFdSi9AZDUbjEDMRmnADMuIWIBR9XqWwpVP2tJAxyQDNQTKsNlZ5TuHMe3MZvPwFm+6P1k1OZk4IG4ZoAyhooABPK3k5SUvY0w50k5sZnu674Vj3TlPP3bXx8gBsQYAumRFPUpDhTIwQyWo-gNZoZCxM06bgX-eUpuyQCscG0YFANPgxfcYHlBFBctPxeSpKCWnAACoT6jLtq6jEu2aR+btiid+AZR3OkD90tvQfD0fjyfL2fzxd8sX7nzrp3bqBd3Kb88GDA1zBxE88RAABVJBBBkUduwdek+1XB9bkCDJn3qV9gKkd8cAXJd8J-Us-y3HcvxXMDJg+E0oLNcR4DHYQAGlkBWK9UPzdC+TDJ8x1wqdygATUbQjiOosjBgogCgJAECDxbF0Pkgttyn4IRhAAUSQFZkBwdoexvO9BgwodsKEicRMUgiyF+YUAWjPJsFqUF6mEAAyYQAAUED8KQp0lbJchlWF5Wc1ysHc1EfP8wKNCVEBYA-Ei7JktcsA3eTpNAms3SQPwk1QegCoEGBsqUQym0PT4XkY-AXBaJB5QHW5LNoxl6NNfAADE41wYRmtaNr7z5QNlPAz5jw0kAAHkYBWFphAAcQoPj3gFLrVIjObVvjGApEGFQ8jJdrOoKhDKqgKhpCKhgCtgLB40WZAAGt8AyKT7vwLtjJSyr43A8BRCiDo+ujXVtggGBiQ8XypGQKhN3jFQzURoKMhKZG3qwBTA2HeRYfhqhowgRpUfR-BVtEUYgA');
 
-// go();
+go();
 </script>
 
 </body>

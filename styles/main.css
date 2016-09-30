@@ -8,12 +8,15 @@ body {
 	display: none;
 }
 
-.phase {
-	font-size: 32px;
-	clear: both;
-	padding-top: 2px;
-	padding-bottom: 4px;
-	font-variant: small-caps;
+.phase{
+	/*background-color: #d9edf7 !important;*/
+	background: -webkit-linear-gradient(#848484, #333333) !important;; /* For Safari 5.1 to 6.0 */
+  	background: -o-linear-gradient(#848484, #333333) !important;; /* For Opera 11.1 to 12.0 */
+  	background: -moz-linear-gradient(#848484, #333333) !important;; /* For Firefox 3.6 to 15 */
+  	background: linear-gradient(#848484, #333333) !important;; /* Standard syntax */
+    font-weight: bold !important;
+    color: white !important;
+    text-shadow: 1px 1px black;
 }
 
 #rules-container {
@@ -23,9 +26,7 @@ body {
 
 .rule {
 	clear: both;
-	height: 30px;
-	padding-bottom: 6px;
-	padding-left : 40px;
+	min-height: 30px;
 }
 
 .unit-name {
@@ -35,8 +36,6 @@ body {
 	vertical-align: middle;
 	font-size: 18px;
 	font-variant: small-caps;
-	padding-left: 10px;
-	padding-right: 10px;
 }
 
 .rule-name {
@@ -52,8 +51,7 @@ body {
 
 .icon {
 	height : 30px;
-	min-width: 60px;
-	padding-right : 10px;
+	min-width: 160px;
 	float: left;
 }
 
@@ -117,15 +115,14 @@ body {
     line-height: 30px;
 	vertical-align: middle;
     display: inline;
-    padding-left: 4px; 
+    /*padding-left: 4px; */
 	/*color: white;*/
 }
 
 .description {
 	font-size: 12px;
-	float: left;
-	line-height: 30px;
-	vertical-align: middle;
+	/*line-height: 30px;*/
+	/*vertical-align: middle;*/
 }
 
 #missing-container {

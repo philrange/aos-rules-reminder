@@ -30,7 +30,7 @@ function displayJson (base64) {
 }
 
 function createRules(armyListData) {
-// console.log(JSON.stringify(armyListData));
+console.log(JSON.stringify(armyListData));
 
     $.each(armyListData,
         function (t, army) {
@@ -76,7 +76,9 @@ function getRules (ruleData, army) {
 }
 
 function getRulesForPhase (phase, ruleData, army, missing) {
-	var rulesForPhase = "<div class='phase'>" + phase + "</div>";
+    // var rulesForPhase = "<div class='phase'>" + phase + "</div>";
+	var rulesForPhase = "<div class='panel panel-default'><div class='panel-heading phase'>" + phase + "</div>";
+    rulesForPhase += "<div class='panel panel-body'>";
 
     rulesForPhase += getRulesForEachUnit(army.units, phase, ruleData, army, missing, rulesForPhase);
     rulesForPhase += getRulesForEachUnit(army.heroes, phase, ruleData, army, missing, rulesForPhase);
@@ -84,6 +86,8 @@ function getRulesForPhase (phase, ruleData, army, missing) {
     rulesForPhase += getRulesForEachUnit(army.warmachines, phase, ruleData, army, missing, rulesForPhase);
     rulesForPhase += getRulesForEachUnit(army.battalions, phase, ruleData, army, missing, rulesForPhase);
  
+    rulesForPhase += "</div></div>";
+
 	return rulesForPhase;
 }
 
@@ -112,16 +116,16 @@ function getRulesForUnitType (t, unit, phase, ruleData, missing) {
 
                     var type = getTypeClass(rule.type);
                     var iconText = rule.value != null ? rule.value.toUpperCase() : "";
-                    var icon = `<div class='icon rounded-corners ` + type + `'>
+                    var icon = `<div class='icon rounded-corners col-xs-1 ` + type + `'>
                     <div class='icon-img'>&nbsp;</div>
                     <div class='icon-text'>` + iconText + `</div>
                     </div>`;
 
-                    var unitNameDiv = "<div class='unit-name'>" + unit.name + "</div>";
-                    var ruleNameDiv = "<div class='rule-name'>" + rule.name + "</div>";
+                    var unitNameDiv = "<div class='unit-name col-xs-2'>" + unit.name + "</div>";
+                    var ruleNameDiv = "<div class='rule-name col-xs-3 text-nowrap'>" + rule.name + "</div>";
                     var textDiv = "<div class='description'>" + rule.text + "</div>";
 
-                    rulesForUnitType += "<div class='rule'>";
+                    rulesForUnitType += "<div class='panel panel-default rule'>";
                     rulesForUnitType += unitNameDiv; 
                     rulesForUnitType += icon;
                     rulesForUnitType += ruleNameDiv + textDiv + "</div>";
