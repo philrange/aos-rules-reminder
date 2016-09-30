@@ -89,8 +89,12 @@ function getRulesForPhase (phase, ruleData, army, missing) {
 
 function getRulesForEachUnit(units, phase, ruleData, army, missing, rulesForPhase) {
     var r = "";
+    var unitsAlreadyDone = new Set();
    $.each(units, function (t, unit) {
-        r += getRulesForUnitType(t, unit, phase, ruleData, missing);
+        if (!unitsAlreadyDone.has(unit.name)) {
+            r += getRulesForUnitType(t, unit, phase, ruleData, missing);
+            unitsAlreadyDone.add(unit.name);
+        };
     });
 
    return r;
