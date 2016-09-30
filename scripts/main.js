@@ -86,6 +86,18 @@ function getRulesForPhase (phase, ruleData, army, missing) {
         rulesForPhase  += getRulesForUnitType(t, unit, phase, ruleData, missing);
     });
 
+    $.each(army.monsters, function (t, unit) {
+        rulesForPhase  += getRulesForUnitType(t, unit, phase, ruleData, missing);
+    });
+
+    $.each(army.warmachines, function (t, unit) {
+        rulesForPhase  += getRulesForUnitType(t, unit, phase, ruleData, missing);
+    });
+
+    $.each(army.battalions, function (t, unit) {
+        rulesForPhase  += getRulesForUnitType(t, unit, phase, ruleData, missing);
+    });
+
 	return rulesForPhase;
 }
 
