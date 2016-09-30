@@ -1,7 +1,5 @@
 
 
-
-
 function go() {
     toggleText();
 
@@ -25,60 +23,66 @@ function toggleText() {
 	$('#inputBox').slideToggle("slow", function () {$('#restart').toggle();});
 }
 
-
 function displayJson (base64) {
 	
-	var a=JSON.parse(LZString.decompressFromEncodedURIComponent(base64))
-
-	createRules(a);
+	var json=JSON.parse(LZString.decompressFromEncodedURIComponent(base64))
+	createRules(json);
 }
-
 
 function createRules(armyListData) {
+// console.log(JSON.stringify(armyListData));
 
-//load data
-$.ajax({
- type: "GET",
- crossDomain:true,
- cache: false,
- url: "data/data.json", 
- success: function (ruleData) { 
-	$("#rules").empty();
-	$("#rules").append(getRules(ruleData, armyListData));
- } 
-}); 
+    $.each(armyListData,
+        function (t, army) {
 
+        if (army.name != null) {
+            //load data
+            $.ajax({
+               type: "GET",
+               crossDomain:true,
+               cache: false,
+               url: "data/" + army.name + ".json", 
+               success: function (ruleData) { 
+                //build rules
+                $("#rules").empty();
+                $("#rules").append(getRules(ruleData, army));
+                },
+                error: function (argument) {
+                    console.log(argument);
+                    $("#debug").append("Error loading file for " + army.name + "<br>");
+                }  
+            }); 
+        }
+
+        }
+    );
 }
 
-function getRules (ruleData, armyListData) {
+function getRules (ruleData, army) {
     var missing = new Set();
-	var rules = getRulesForPhase("Deployment", ruleData, armyListData, missing);
-    rules += getRulesForPhase("Hero", ruleData, armyListData, missing);
-    rules += getRulesForPhase("Movement", ruleData, armyListData, missing);
-    rules += getRulesForPhase("Shooting", ruleData, armyListData, missing);
-    rules += getRulesForPhase("Charge", ruleData, armyListData, missing);
-    rules += getRulesForPhase("Combat", ruleData, armyListData, missing);
-	rules += getRulesForPhase("Battleshock", ruleData, armyListData, missing);
+	var rules = getRulesForPhase("Deployment", ruleData, army, missing);
+    rules += getRulesForPhase("Hero", ruleData, army, missing);
+    rules += getRulesForPhase("Movement", ruleData, army, missing);
+    rules += getRulesForPhase("Shooting", ruleData, army, missing);
+    rules += getRulesForPhase("Charge", ruleData, army, missing);
+    rules += getRulesForPhase("Combat", ruleData, army, missing);
+	rules += getRulesForPhase("Battleshock", ruleData, army, missing);
 
     logMissingUnits(missing);
 
 	return rules;
 }
 
-function getRulesForPhase (phase, ruleData, armyListData, missing) {
+function getRulesForPhase (phase, ruleData, army, missing) {
 	var rulesForPhase = "<div class='phase'>" + phase + "</div>";
 
-  $.each(armyListData,
-    function (t, army) {
+    $.each(army.units, function (t, unit) {
+        rulesForPhase  += getRulesForUnitType(t, unit, phase, ruleData, missing);
+    });
 
-        $.each(army.units, function (t, unit) {
-            rulesForPhase  += getRulesForUnitType(t, unit, phase, ruleData, missing);
-        });
-
-        $.each(army.heroes, function (t, unit) {
-            rulesForPhase  += getRulesForUnitType(t, unit, phase, ruleData, missing);
-        });
-    })
+    $.each(army.heroes, function (t, unit) {
+        rulesForPhase  += getRulesForUnitType(t, unit, phase, ruleData, missing);
+    });
 
 	return rulesForPhase;
 }
@@ -94,9 +98,10 @@ function getRulesForUnitType (t, unit, phase, ruleData, missing) {
                 if (rule.phase === phase.toUpperCase()) {
 
                     var type = getTypeClass(rule.type);
+                    var iconText = rule.value != null ? rule.value.toUpperCase() : "";
                     var icon = `<div class='icon rounded-corners ` + type + `'>
                     <div class='icon-img'>&nbsp;</div>
-                    <div class='icon-text'>` + rule.value.toUpperCase() + `</div>
+                    <div class='icon-text'>` + iconText + `</div>
                     </div>`;
 
                     var unitNameDiv = "<div class='unit-name'>" + unit.name + "</div>";
@@ -125,6 +130,8 @@ function getTypeClass(type) {
         typeClass = "debuff";
     } else if (type.toLowerCase() == "reroll") {
         typeClass = "reroll";
+    } else if (type.toLowerCase() == "save") {
+        typeClass = "save";
     } else {
         typeClass = "other";
     }

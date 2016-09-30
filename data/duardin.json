@@ -1,0 +1,31 @@
+{
+
+	"Longbeards" : { "rules" : [
+		{ "phase" : "COMBAT", "type" : "REROLL", "value" : "save", "name" : "Gromril Shields", "text" : "This unit can create a shield wall instead of running or charging in its turn. If it does so, re-roll all failed save rolls for the unit in the combat phase until its next movement phase."},
+		{ "phase" : "BATTLESHOCK", "type" : "OTHER", "name" : "<i>I thought Dwarfs were made of sterner stuff!</i>", "text" : "Roll a dice each time a <span class='keyword'>Dispossessed</span> model from your army flees whilst within 8\" of this unit; on a 5 or more that model stands firm under the Longbeards’ stern gaze and does not flee."},		
+		{ "phase" : "HERO", "type" : "OTHER", "name" : "<i>Who does this beardling think he is?</i>", "text" : "<span class='keyword'>Dispossessed</span> Heroes from your army within 8\" of this unit in the hero phase can use their command abilities even if they are not your general."},
+		{ "phase" : "COMBAT", "type" : "REROLL", "value" : "to wound", "name" : "<i>Goblins are weedier these days!</i>", "text" : "You can re-roll wound rolls of 1 for <span class='keyword'>Dispossessed</span> models from your army that are within 8\" of this unit when they attack in the combat phase."}
+	]},
+	
+	"Dwarf Warriors" : { "rules" : [
+		{ "phase" : "COMBAT", "type" : "REROLL", "value" : "save", "name" : "Dwarf Shields", "text" : "A unit equipped with Dwarf Shields can create a shield wall instead of running or charging in its turn. If it does so, re-roll all failed save rolls for the unit in the combat phase until its next movement phase."},
+		{ "phase" : "COMBAT", "type" : "REROLL", "value" : "to wound", "name" : "Resolute In Defence", "text" : "You can re-roll failed wound rolls of 1 when attacking with a Dwarf Warrior in your opponent’s combat phase. You can instead re-roll all failed wound rolls for a Dwarf Warrior if its unit has 20 or more models when it attacks in your opponent’s combat phase."},
+		{ "phase" : "HERO", "type" : "SAVE", "value" : "5+ save", "name" : "Runic Icon", "text" : "Roll a dice if a spell affects a unit with any Runic Icons. On a roll of a 5 or a 6, that spell has no affect on the unit (but it will affect other units normally)."},
+		{ "phase" : "BATTLESHOCK", "type" : "OTHER", "value" : "", "name" : "Clan Banner", "text" : "If you fail a battleshock test for a unit that has any Clan Banners, halve the number of models that flee (rounding up)."}
+	]},	
+
+	"Quarrellers" : { "rules" : [
+		{ "phase" : "COMBAT", "type" : "REROLL", "value" : "save", "name" : "Dwarf Bucklers", "text" : "If a unit is equipped with Dwarf Bucklers, it can create a shield wall instead of running or charging in its turn. If it does so, re-roll all failed save rolls for the unit in the combat phase until its next movement phase."},
+		{ "phase" : "SHOOTING", "type" : "BUFF", "value" : "attack", "name" : "Volley Fire", "text" : " Quarrellers can shoot twice if their unit has 20 or more models and there are no enemy models within 3\"."},		
+		{ "phase" : "HERO", "type" : "SAVE", "value" : "5+ save", "name" : "Runic Icon", "text" : "Roll a dice if a spell affects a unit with any Runic Icons. On a roll of a 5 or a 6, that spell has no affect on the unit (but it will affect other units normally)."},
+		{ "phase" : "BATTLESHOCK", "type" : "OTHER", "value" : "", "name" : "Clan Banner", "text" : "If you fail a battleshock test for a unit that has any Clan Banners, halve the number of models that flee (rounding up)."}
+	]},
+	
+	"Slayers" : { "rules" : [
+		{ "phase" : "BATTLESHOCK", "type" : "OTHER", "name" : "Seeking a Glorious Death", "text" : "You do not need to take battleshock tests for a unit of Slayers if they can see an enemy <span class='keyword'>Monster</span>."},
+		{ "phase" : "COMBAT", "type" : "OTHER", "name" : "Deathblow", "text" : "If a Slayer is slain in the combat phase, roll a dice before it is removed. On a roll of 4 or more, you can inflict 1 mortal wound on the enemy unit that struck the fatal blow after all of its attacks have been made."},
+		{ "phase" : "COMBAT", "type" : "BUFF", "value" : "to wound", "name" : "Slayer Oath", "text" : "You can add 1 to any wound rolls for a Slayer if the target of the attack has more than 1 Wound."},
+		{ "phase" : "COMBAT", "type" : "BUFF", "attack" : "The Slayer King", "text" : "Slayers make an extra attack with their Slayer Axes whilst their unit is within 8\" of <span class='keyword'>Ungrim Ironfist the Slayer King.</span>"}
+	]}
+
+}
