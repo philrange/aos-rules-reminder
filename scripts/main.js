@@ -36,12 +36,14 @@ function createRules(armyListData) {
         function (t, army) {
 
         if (army.name != null) {
+            var armyName = army.name.toLowerCase();
+            console.log("Loading file for " + armyName);
             //load data
             $.ajax({
                type: "GET",
                crossDomain:true,
                cache: false,
-               url: "data/" + army.name.toLowerCase() + ".json", 
+               url: "data/" + armyName + ".json", 
                success: function (ruleData) { 
                 //build rules
                 $("#rules").empty();
