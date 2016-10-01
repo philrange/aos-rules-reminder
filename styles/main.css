@@ -4,7 +4,18 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
-#restart {
+#input-container {
+	width: 400px;
+    margin: auto;
+    padding: 2px;
+}
+
+#go {
+	float: right;
+    margin-top: 2px;
+}
+
+#restartBox {
 	display: none;
 }
 
@@ -24,23 +35,33 @@ body {
 	clear: both;
 }
 
+.panel {
+	padding: 2px;
+	margin-bottom: 2px !important;
+}
+
+.panel-body {
+	padding-bottom: 2px !important;
+}
+
 .rule {
 	clear: both;
-	min-height: 30px;
+	/*min-height: 30px;*/
 }
 
 .unit-name {
 	float: left;
-	height: 30px;
+	/*height: 30px;*/
 	line-height: 30px;
 	vertical-align: middle;
-	font-size: 18px;
+	font-size: 16px;
 	font-variant: small-caps;
+	padding-right: 10px;
 }
 
 .rule-name {
 	float: left;
-	height: 30px;
+	/*height: 30px;*/
 	line-height: 30px;
 	vertical-align: middle;
 	font-size: 12px;
@@ -51,8 +72,10 @@ body {
 
 .icon {
 	height : 30px;
-	min-width: 160px;
+	/*min-width: 100px;*/
 	float: left;
+	padding-right: 4px;
+	border: 1px solid #ccc;
 }
 
 .rounded-corners {
@@ -112,17 +135,18 @@ body {
 .icon-text {
 	font-weight: bold;
 	height: 30px;
-    line-height: 30px;
+    line-height: 30px;`
 	vertical-align: middle;
     display: inline;
-    /*padding-left: 4px; */
-	/*color: white;*/
 }
 
-.description {
-	font-size: 12px;
+.description-container {
+	font-size: 10px;
+	vertical-align: center;
 	/*line-height: 30px;*/
-	/*vertical-align: middle;*/
+}
+
+.description-container .description {
 }
 
 #missing-container {

@@ -20,7 +20,7 @@ function clearRules() {
 
 function toggleText() {
 	//slide text box in/out, and toggle restart button once complete
-	$('#inputBox').slideToggle("slow", function () {$('#restart').toggle();});
+	$('#inputBox').slideToggle("slow", function () {$('#restartBox').toggle();});
 }
 
 function displayJson (base64) {
@@ -108,7 +108,7 @@ function getRulesForUnitType (t, unit, phase, ruleData, missing) {
     var unitRules = ruleData[unit.name];
     var rulesForUnitType = "";
     if (unitRules == null) {
-        missing.add(unit.name);
+        missing.add(unit);
     } else {
         $.each(unitRules.rules, 
             function (t, rule) {
@@ -116,19 +116,20 @@ function getRulesForUnitType (t, unit, phase, ruleData, missing) {
 
                     var type = getTypeClass(rule.type);
                     var iconText = rule.value != null ? rule.value.toUpperCase() : "";
-                    var icon = `<div class='icon rounded-corners col-xs-1 ` + type + `'>
+                    var iconDiv = `<div class='icon rounded-corners ` + type + `'>
                     <div class='icon-img'>&nbsp;</div>
                     <div class='icon-text'>` + iconText + `</div>
                     </div>`;
 
-                    var unitNameDiv = "<div class='unit-name col-xs-2'>" + unit.name + "</div>";
-                    var ruleNameDiv = "<div class='rule-name col-xs-3 text-nowrap'>" + rule.name + "</div>";
-                    var textDiv = "<div class='description'>" + rule.text + "</div>";
+                    var unitNameDiv = "<div class='unit-name text-nowrap'>" + unit.name + "</div>";
+                    var ruleNameDiv = "<div class='rule-name text-nowrap'>" + rule.name + "</div>";
+                    var textDiv = "<div class='description-container'><span class='description'>" + rule.text + "</span></div>";
 
-                    rulesForUnitType += "<div class='panel panel-default rule'>";
+                    rulesForUnitType += "<div class='panel panel-default rule row'>";
                     rulesForUnitType += unitNameDiv; 
-                    rulesForUnitType += icon;
-                    rulesForUnitType += ruleNameDiv + textDiv + "</div>";
+                    rulesForUnitType += iconDiv;
+                    rulesForUnitType += ruleNameDiv;
+                    rulesForUnitType += textDiv + "</div>";
                     
                 };
             }
@@ -160,7 +161,7 @@ function logMissingUnits(missing) {
     if (missing.size > 0) {
         $('#missing').append("<h4>Rules Not Found</h4>");
         missing.forEach(function(unit) {
-            $('#missing').append("<br>" + unit);
+            $('#missing').append("<br>" + unit.name + " " + JSON.stringify(unit));
         });
     }
 }
