@@ -1,0 +1,36 @@
+.print .panel-heading {
+	background: transparent !important;
+	color: black !important;
+	font-size: 20px;
+	text-shadow: none !important;
+}
+
+.print .checkbox-container {
+	display: none;
+}
+
+.print .icon {
+	background: white;
+	border: none;
+	padding-right: 10px;
+}
+
+.print .icon-img {
+	color: inherit;
+	font-weight: bold;
+	/*font-size: 20px;*/
+	background: transparent;
+	width: 16px;
+}
+
+.print .reroll .icon-img {
+	font-size: 24px;
+}
+
+.print .save .icon-img {
+	width: 0px;
+}
+
+.print .rule-name {
+	display: none;
+}
