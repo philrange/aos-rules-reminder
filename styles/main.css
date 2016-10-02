@@ -4,16 +4,30 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
-#restart {
+#input-container {
+	width: 400px;
+    margin: auto;
+    padding: 2px;
+}
+
+#go {
+	float: right;
+    margin-top: 2px;
+}
+
+#restartBox {
 	display: none;
 }
 
-.phase {
-	font-size: 32px;
-	clear: both;
-	padding-top: 2px;
-	padding-bottom: 4px;
-	font-variant: small-caps;
+.phase{
+	/*background-color: #d9edf7 !important;*/
+	background: -webkit-linear-gradient(#848484, #333333) !important;; /* For Safari 5.1 to 6.0 */
+  	background: -o-linear-gradient(#848484, #333333) !important;; /* For Opera 11.1 to 12.0 */
+  	background: -moz-linear-gradient(#848484, #333333) !important;; /* For Firefox 3.6 to 15 */
+  	background: linear-gradient(#848484, #333333) !important;; /* Standard syntax */
+    font-weight: bold !important;
+    color: white !important;
+    text-shadow: 1px 1px black;
 }
 
 #rules-container {
@@ -21,27 +35,33 @@ body {
 	clear: both;
 }
 
+.panel {
+	padding: 2px;
+	margin-bottom: 2px !important;
+}
+
+.panel-body {
+	padding-bottom: 2px !important;
+}
+
 .rule {
 	clear: both;
-	height: 30px;
-	padding-bottom: 6px;
-	padding-left : 40px;
+	/*min-height: 30px;*/
 }
 
 .unit-name {
 	float: left;
-	height: 30px;
+	/*height: 30px;*/
 	line-height: 30px;
 	vertical-align: middle;
-	font-size: 18px;
+	font-size: 16px;
 	font-variant: small-caps;
-	padding-left: 10px;
 	padding-right: 10px;
 }
 
 .rule-name {
 	float: left;
-	height: 30px;
+	/*height: 30px;*/
 	line-height: 30px;
 	vertical-align: middle;
 	font-size: 12px;
@@ -52,9 +72,20 @@ body {
 
 .icon {
 	height : 30px;
-	min-width: 60px;
-	padding-right : 10px;
+	/*min-width: 100px;*/
 	float: left;
+	padding-right: 4px;
+	border: 1px solid #ccc;
+}
+
+.checkbox-container {
+	height: 30px;
+	float : left;
+	/*border: 1px solid #ccc;*/
+	/*border-radius: 2px;*/
+	padding-right: 4px;
+	line-height: 30px;
+	vertical-align: center;
 }
 
 .rounded-corners {
@@ -78,7 +109,7 @@ body {
 }
 
 .other {
-	background: #aaa;
+	display : none;
 }
 
 .icon-img {
@@ -88,6 +119,7 @@ body {
     height: 30px;
     width: 30px;
     display: inline-block;
+    color: transparent;
     /*float: left;*/
 }
 
@@ -107,25 +139,22 @@ body {
 	background-image: url("../images/shield.png");
 }
 
-.other .icon-img {
-	/*background-image: url("../images/other.png");*/
-}
 
 .icon-text {
 	font-weight: bold;
 	height: 30px;
-    line-height: 30px;
+    line-height: 30px;`
 	vertical-align: middle;
     display: inline;
-    padding-left: 4px; 
-	/*color: white;*/
 }
 
-.description {
-	font-size: 12px;
-	float: left;
-	line-height: 30px;
-	vertical-align: middle;
+.description-container {
+	font-size: 10px;
+	vertical-align: center;
+	/*line-height: 30px;*/
+}
+
+.description-container .description {
 }
 
 #missing-container {
@@ -136,3 +165,4 @@ body {
 	font-variant: small-caps;
 	font-weight: bold;
 }
+

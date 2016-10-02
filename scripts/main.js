@@ -1,4 +1,14 @@
 
+var deploymentRules = [];
+var heroRules = [];
+var movementRules = [];
+var shootingRules = [];
+var chargeRules = [];
+var combatRules = [];
+var battleshockRules = [];
+var missing = new Set();
+var ruleId = 1;
+
 
 function go() {
     toggleText();
@@ -12,20 +22,50 @@ function restart() {
 	clearRules();
 }
 
+function print() {
+    $('#printableRules').printThis();
+}
+
+function displayPrintable() {
+
+    $("#printableRules").empty();
+    $("#printableRules").append("<div class='print'>");
+    $("#printableRules").append(buildSectionHtml("Deployment", filterRules(deploymentRules)));
+    $("#printableRules").append(buildSectionHtml("Hero", filterRules(heroRules)));
+    $("#printableRules").append(buildSectionHtml("Movement", filterRules(movementRules)));
+    $("#printableRules").append(buildSectionHtml("Shooting", filterRules(shootingRules)));
+    $("#printableRules").append(buildSectionHtml("Charge", filterRules(chargeRules)));
+    $("#printableRules").append(buildSectionHtml("Combat", filterRules(combatRules)));
+    $("#printableRules").append(buildSectionHtml("Battleshock", filterRules(battleshockRules)));
+    $("#printableRules").append("</div>");
+    $('#printModal').modal("show");
+}
+
+function filterRules(rulesArray) {
+    return rulesArray.filter(function (rule) {
+        return rule.enabled == true;
+    });
+}
+
 function clearRules() {
     $('#rules').empty();
     $('#missing').empty();
     $('#debug').empty();
+    missing = new Set()
+    ruleId = 1;
+    //todo
+    // heroRules = [];
 }
 
 function toggleText() {
 	//slide text box in/out, and toggle restart button once complete
-	$('#inputBox').slideToggle("slow", function () {$('#restart').toggle();});
+	$('#inputBox').slideToggle("slow", function () {$('#restartBox').toggle();});
 }
 
 function displayJson (base64) {
 	
 	var json=JSON.parse(LZString.decompressFromEncodedURIComponent(base64))
+    // console.log(JSON.stringify(json));
 	createRules(json);
 }
 
@@ -45,9 +85,24 @@ function createRules(armyListData) {
                cache: false,
                url: "data/" + armyName + ".json", 
                success: function (ruleData) { 
+
                 //build rules
+                buildRules(ruleData, army);
+
+                //add rules to page
                 $("#rules").empty();
-                $("#rules").append(getRules(ruleData, army));
+                $("#rules").append(buildSectionHtml("Deployment", deploymentRules));
+                $("#rules").append(buildSectionHtml("Hero", heroRules));
+                $("#rules").append(buildSectionHtml("Movement", movementRules));
+                $("#rules").append(buildSectionHtml("Shooting", shootingRules));
+                $("#rules").append(buildSectionHtml("Charge", chargeRules));
+                $("#rules").append(buildSectionHtml("Combat", combatRules));
+                $("#rules").append(buildSectionHtml("Battleshock", battleshockRules));
+                addListeners();
+
+                //debug outut
+                logMissingUnits()
+
                 },
                 error: function (argument) {
                     console.log(argument);
@@ -60,138 +115,147 @@ function createRules(armyListData) {
     );
 }
 
-function getRules (ruleData, army) {
-    var missing = new Set();
-	var rules = getRulesForPhase("Deployment", ruleData, army, missing);
-    rules += getRulesForPhase("Hero", ruleData, army, missing);
-    rules += getRulesForPhase("Movement", ruleData, army, missing);
-    rules += getRulesForPhase("Shooting", ruleData, army, missing);
-    rules += getRulesForPhase("Charge", ruleData, army, missing);
-    rules += getRulesForPhase("Combat", ruleData, army, missing);
-	rules += getRulesForPhase("Battleshock", ruleData, army, missing);
+function buildRules (ruleData, army) {
 
-    logMissingUnits(missing);
-
-	return rules;
+    buildRulesForUnitType(ruleData, army.units);
+    buildRulesForUnitType(ruleData, army.heroes);
+    buildRulesForUnitType(ruleData, army.monsters);
+    buildRulesForUnitType(ruleData, army.warmachines);
+    buildRulesForUnitType(ruleData, army.battalions);
 }
 
-function getRulesForPhase (phase, ruleData, army, missing) {
-	var rulesForPhase = "<div class='phase'>" + phase + "</div>";
-
-    rulesForPhase += getRulesForEachUnit(army.units, phase, ruleData, army, missing, rulesForPhase);
-    rulesForPhase += getRulesForEachUnit(army.heroes, phase, ruleData, army, missing, rulesForPhase);
-    rulesForPhase += getRulesForEachUnit(army.monsters, phase, ruleData, army, missing, rulesForPhase);
-    rulesForPhase += getRulesForEachUnit(army.warmachines, phase, ruleData, army, missing, rulesForPhase);
-    rulesForPhase += getRulesForEachUnit(army.battalions, phase, ruleData, army, missing, rulesForPhase);
- 
-	return rulesForPhase;
-}
-
-function getRulesForEachUnit(units, phase, ruleData, army, missing, rulesForPhase) {
-    var r = "";
+function buildRulesForUnitType (ruleData, unitList) {
     var unitsAlreadyDone = new Set();
-   $.each(units, function (t, unit) {
+   $.each(unitList, function (t, unit) {
         if (!unitsAlreadyDone.has(unit.name)) {
-            r += getRulesForUnitType(t, unit, phase, ruleData, missing);
+            buildRulesForUnit(t, unit, ruleData);
             unitsAlreadyDone.add(unit.name);
         };
     });
-
-   return r;
 }
 
-function getRulesForUnitType (t, unit, phase, ruleData, missing) {
+function buildRulesForUnit(t, unit, ruleData) {
     var unitRules = ruleData[unit.name];
     var rulesForUnitType = "";
     if (unitRules == null) {
-        missing.add(unit.name);
+        missing.add(unit);
     } else {
         $.each(unitRules.rules, 
             function (t, rule) {
-                if (rule.phase === phase.toUpperCase()) {
 
-                    var type = getTypeClass(rule.type);
-                    var iconText = rule.value != null ? rule.value.toUpperCase() : "";
-                    var icon = `<div class='icon rounded-corners ` + type + `'>
-                    <div class='icon-img'>&nbsp;</div>
-                    <div class='icon-text'>` + iconText + `</div>
-                    </div>`;
-
-                    var unitNameDiv = "<div class='unit-name'>" + unit.name + "</div>";
-                    var ruleNameDiv = "<div class='rule-name'>" + rule.name + "</div>";
-                    var textDiv = "<div class='description'>" + rule.text + "</div>";
-
-                    rulesForUnitType += "<div class='rule'>";
-                    rulesForUnitType += unitNameDiv; 
-                    rulesForUnitType += icon;
-                    rulesForUnitType += ruleNameDiv + textDiv + "</div>";
-                    
-                };
+                var id = ruleId++;
+                var fullRule = {enabled : true, id : id, type : rule.type, iconText : rule.value, unitName : unit.name, ruleName : rule.name, description : rule.text};
+                addToPhaseRules(rule.phase, id, fullRule);
             }
         );
+
+        // can add general/artifact etc rules here too
+        console.log(unit.general != null ? "general: " + unit.general : "general not set")
     }
 
     // console.log(rulesForUnitType);
     return rulesForUnitType;
 }
 
-function getTypeClass(type) {
-    var typeClass;
-    if (type.toLowerCase() == "buff") {
-        typeClass = "buff";
-    } else if (type.toLowerCase() == "debuff") {
-        typeClass = "debuff";
-    } else if (type.toLowerCase() == "reroll") {
-        typeClass = "reroll";
-    } else if (type.toLowerCase() == "save") {
-        typeClass = "save";
-    } else {
-        typeClass = "other";
-    }
-
-    return typeClass;
+function addToPhaseRules(phase, id, fullRule) {
+    eval(phase.toLowerCase() + 'Rules')[id] = fullRule;
 }
 
-function logMissingUnits(missing) {
+function buildSectionHtml(phase, rules) {
+
+    if (rules.length > 0) {
+        var section = "<div class='panel panel-default'><div class='panel-heading phase'>" + phase + "</div>";
+        section += "<div class='panel panel-body'>";
+
+        $.each(rules, function (t, rule) {
+            if (rule != null) {
+                // console.log(rule);
+                section += buildRuleHtml(phase, rule);
+            }
+        })
+
+        section += "</div></div>";
+    }
+
+    return section;
+}
+
+function buildRuleHtml(phase, rule) {
+    var html = "";
+
+    var checkBoxDiv = "<div class='checkbox-container'><input type='checkbox' class='checkbox' value='" + phase + "' id='checkbox-" + rule.id + "'></div>";
+    var type = getTypeClass(rule.type);
+    var iconText = rule.iconText != null ? rule.iconText.toUpperCase() : "";
+    var iconDiv = `<div class='icon rounded-corners ` + type.class + `'>
+    <div class='icon-img'>` + type.text + `</div>
+    <div class='icon-text'>` + iconText + `</div>
+    </div>`;
+
+    var unitNameDiv = "<div class='unit-name text-nowrap'>" + rule.unitName + "</div>";
+    var ruleNameDiv = "<div class='rule-name text-nowrap'>" + rule.ruleName + "</div>";
+    var textDiv = "<div class='description-container'><span class='description'>" + rule.description + "</span></div>";
+
+    html += "<div class='panel panel-default rule row' id='ruleRow-" + rule.id + "'>";
+    html += checkBoxDiv; 
+    html += unitNameDiv; 
+    html += iconDiv;
+    html += ruleNameDiv;
+    html += textDiv + "</div>";
+
+    return html;
+}
+
+function getTypeClass(type) {
+    var typeValues = [];
+    typeValues.text = "&nbsp;";
+    if (type.toLowerCase() == "buff") {
+        typeValues.class = "buff";
+        typeValues.text = "+1";
+    } else if (type.toLowerCase() == "debuff") {
+        typeValues.class = "debuff";
+        typeValues.text = "-1";
+    } else if (type.toLowerCase() == "reroll") {
+        typeValues.class = "reroll";
+        typeValues.text = "&#9860;";
+    } else if (type.toLowerCase() == "save") {
+        typeValues.class = "save";
+    } else {
+        typeValues.class = "other";
+    }
+
+    return typeValues;
+}
+
+function logMissingUnits() {
     if (missing.size > 0) {
         $('#missing').append("<h4>Rules Not Found</h4>");
         missing.forEach(function(unit) {
-            $('#missing').append("<br>" + unit);
+            $('#missing').append("<br>" + unit.name);
+            // $('#missing').append("<br>" + unit.name + " " + JSON.stringify(unit));
         });
     }
 }
 
-function createTextArmy(armyListData) {
-     $("#textListSpan").empty(), $("#textListSpan").append("<b>Leaders</b><br>"), $.each(armyListData,
-        function (t, a) {
-            $.each(a.heroes,
-                function (t, a) {
-                    $("#textListSpan").append("" + a.name + " (" + a.cost + ")<br>"), "No" !== a.general && $("#textListSpan").append(" -<small> General</small><br>"), void 0 !== a.equip && $("#textListSpan").append(" -<small> " + a.equip + "</small><br>"), "None" !== a.commandTrait && $("#textListSpan").append(" -<small> Trait: " + a.commandTrait.split("-")[0] + "</small><br>"), "None" !== a.artefact && $("#textListSpan").append(" -<small> Artefact: " + a.artefact.split("-")[0] + "</small><br>")
-                })
-        }), $("#textListSpan").append("<br>"), $("#textListSpan").append("<b>Units</b><br>"), $.each(armyListData,
-        function (t, a) {
-            $.each(a.units,
-                function (t, a) {
-                    $("#textListSpan").append("" + a.name + " x " + a.models + " (" + a.cost + ")<br>"), void 0 !== a.equip && $("#textListSpan").append(" -<small> " + a.equip + "</small><br>")
-                })
-        }), $("#textListSpan").append("<br>"), $("#textListSpan").append("<b>Behemoths</b><br>"), $.each(armyListData,
-        function (t, a) {
-            $.each(a.monsters,
-                function (t, a) {
-                    $("#textListSpan").append("" + a.name + " (" + a.cost + ")<br>")
-                })
-        }), $("#textListSpan").append("<br>"), $("#textListSpan").append("<b>War Machines</b><br>"), $.each(armyListData,
-        function (t, a) {
-            $.each(a.warmachines,
-                function (t, a) {
-                    $("#textListSpan").append("" + a.name + " (" + a.cost + ")<br>")
-                })
-        }), $("#textListSpan").append("<br>"), $("#textListSpan").append("<b>Batallions</b><br>"), $.each(armyListData,
-        function (t, a) {
-            $.each(a.formations,
-                function (t, a) {
-                    $("#textListSpan").append("" + a.name + " (" + a.cost + ")<br>")
-                })
-        }), $("#textListSpan").append("<br>"),
-        $("#textListSpan").append("<b>Total:</b> " + totalPoints + "/" + poolLimit), $("#textListSpan").append("<br><br>");
+function addListeners() {
+
+    $(".checkbox").on('change', function() {
+        var id = this.id.substring(9);
+        var elementId = '#ruleRow-' + id;
+        var element = $(elementId);
+
+        var phase = this.value;
+    if(this.checked) {
+        //todo
+        toggleRule(phase, id, false);
+        element.fadeTo(200,0.2);
+
+    } else {
+        toggleRule(phase, id, true);
+        element.fadeTo(200,1);
+    }
+    });
+}
+
+function toggleRule(phase, id, enabled) {
+    eval(phase.toLowerCase() + 'Rules')[id].enabled = enabled;
 }
