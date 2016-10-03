@@ -1,0 +1,104 @@
+<html>
+<head>
+	<title>Rule Builder</title>
+
+	<link rel="stylesheet" href="styles/main.css">
+	<link rel="stylesheet" href="styles/add.css">
+
+	<script src="scripts/add.js"></script>
+	<script src="scripts/main.js"></script>
+	<script src="scripts/jquery-3.1.1.min.js"></script>
+	<script src="scripts/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" href="styles/bootstrap.min.css">
+	<link rel="stylesheet" href="styles/bootstrap-theme.min.css">
+
+</head>
+
+<body>
+
+<div>
+
+	<div id='units-container'>
+		Units done so far:<br>
+		<span id="units"></span>
+	</div>
+
+	<div id='rules-container'>
+		Rules done so far for this unit:
+		<span id="rules"></span>
+	</div>
+
+	<div class='input-group' id='unitName-container'>
+		<span class="input-group-addon">Unit Name</span>
+		<input type='text' class='form-control' id='unitName'></input>
+	</div>
+
+	<div id='ruleInput' class='row form-inline'>
+		<div class='ruleField'>
+	    <div class="input-group">
+		<span class="input-group-addon">Phase</span>
+	        <div class="selectContainer">
+	            <select class="form-control" name="phase" id='phase'>
+	                <option value="">Choose a phase</option>
+	                <option value="DEPLOYMENT">DEPLOYMENT</option>
+	                <option value="HERO">HERO</option>
+	                <option value="MOVEMENT">MOVEMENT</option>
+	                <option value="SHOOTING">SHOOTING</option>
+	                <option value="CHARGE">CHARGE</option>
+	                <option value="COMBAT">COMBAT</option>
+	                <option value="BATTLESHOCK">BATTLESHOCK</option>
+	            </select>
+	        </div>
+	    </div>  
+	    </div>
+		<div class='ruleField'>
+	    <div class="input-group">
+		<span class="input-group-addon">Type</span>
+	        <div class="selectContainer">
+	            <select class="form-control" name="type" id='type'>
+	                <option value="">Choose a type</option>
+	                <option value="BUFF">BUFF</option>
+	                <option value="DEBUFF">DEBUFF</option>
+	                <option value="REROLL">REROLL</option>
+	                <option value="SAVE">SAVE</option>
+	                <option value="OTHER">OTHER</option>
+	            </select>
+	        </div>
+	    </div>
+	</div>
+	<div class='ruleField'>
+		<div class='input-group'>
+			<span class="input-group-addon">Value</span>
+			<input type='text' class='form-control' id='value'></input>
+		</div>
+	</div>	
+	<div class='ruleField'>
+		<div class='input-group'>
+			<span class="input-group-addon">Name</span>
+			<input type='text' class='form-control' id='name'></input>
+		</div>
+	</div>	
+	<div class='ruleField'>
+		<div class='input-group'>
+			<span class="input-group-addon">Text</span>
+			<textarea type='text' class='form-control' id='text'></textarea>
+		</div>
+	</div>
+    </div>
+
+    <div>
+		<button id='addRule' class='btn btn-primary' onClick="addRule()">Add Rule</button>
+
+		<button id='finishUnit' class='btn btn-primary' onClick="finishUnit()">Finish Unit</button>
+	</div>
+
+<div id='json-container'>
+	<span id='jsonOutput'></span>
+</div>
+
+</div>
+
+
+</body>
+</html>

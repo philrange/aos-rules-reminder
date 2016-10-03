@@ -20,6 +20,19 @@
 
 <body>
 
+<!-- navbar -->
+
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container navbar-container">
+	<span class="navbar-brand" >AoS Cheat Sheet</span>
+		<ul class="nav navbar-nav pull-right">
+			<li><a href="#" onClick='instructions()'>Instructions</a></li>
+			<li><a href="#" onClick='about()'>About</a></li>
+		</ul>
+	</div>
+</nav>
+
+<!-- input buttons -->
 <div id="input-container">
 	<div id='inputBox'>
 		<div>Paste text here</div>
@@ -35,6 +48,7 @@
 	</div>
 </div>
 
+<!-- main page -->
 <div class="container">
 
 	<div id='rules-container'>
@@ -67,6 +81,48 @@
 	  <!-- </div> -->
 	  </div>
 	</div>
+
+
+	<div class="modal fade bs-example-modal-lg" id="instructionsModal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+			<div class="modal-header" style="background-color: brown; color: white">
+			    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			    <h4 class="modal-title" id="myModalLabel">Instructions</h4>
+			</div>
+	   		<div class="modal-body">
+				<p>To get your army list, create one on www.scrollbuilder.com, click Share Army, copy the link. Paste the link into your browser and it should take you to scrollbuilder.com/?xxx where xxx is a load of random letters. Copy the random letters (everything after the ?) and paste into the text box on this page.</p>
+
+				<p class='alert alert-danger'><b>Note:</b> I have only typed up rules for a few units so far, so you'll probably get an error message saying file not found for x army, or a list at the bottom of the page with all the units in your army that don't have rules yet. If you don't want to wait for me to add all the rules, you could help by adding a few yourself. No programming ability required. Email me to find out how. <a href='mailto:aoscheatsheet@gmail.com' class='alert-link'>aoscheatsheet@gmail.com</a></p>
+
+				<p>All rules for a unit will be displayed; click on the check box on the left of the rule to exclude it from the list of rules to be printed. (For example if the rule applies to units of 20 models or more, and your unit only has 10 models)</p>
+
+				<p>Click the Print button to display a preview of the printout.</p>
+
+				<p>Click the Print button on the preview page to print.</p>
+	       	</div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade bs-example-modal-sm" id="aboutModal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog modal-sm">
+	    <div class="modal-content">
+			<div class="modal-header" style="background-color: brown; color: white">
+			    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			    <h4 class="modal-title" id="myModalLabel">About</h4>
+			</div>
+	   		<div class="modal-body">
+				<p>
+	   			This site was inspired by a forum post about some sort of cheat sheet to help remember to use all your rules. As a forgetful man, and a programmer, it seemed an obvious project to learn how to build a website.</p>
+
+	   			<p>I'm not a professional web designer though, so any thoughts, comments, suggestions, bugs, etc. are welcome. Please get in touch <a href='mailto:aoscheatsheet@gmail.com'>aoscheatsheet@gmail.com</a></p>
+
+	       	</div>
+	    </div>
+	  </div>
+	</div>
+
 
 <script type="text/javascript">
 

@@ -22,6 +22,14 @@ function restart() {
 	clearRules();
 }
 
+function about() {
+    $('#aboutModal').modal("show");
+}
+
+function instructions() {
+    $('#instructionsModal').modal("show");
+}
+
 function print() {
     $('#printableRules').printThis();
 }
