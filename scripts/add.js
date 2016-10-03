@@ -8,7 +8,7 @@ function addRule () {
 	var type = $('#type').val();
 	var value = $('#value').val();
 	var name = $('#name').val();
-	var text = $('#text').val().replace("\n", " ");
+	var text = $('#text').val().replace(/(\n)+/g, " ");
 
 	var rule = {phase : phase, type : type, value : value, name : name, text : text};
 
