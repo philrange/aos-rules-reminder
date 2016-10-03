@@ -1,0 +1,39 @@
+#unitName-container {
+	width: 200px;
+}
+
+
+#phase, #type, #name {
+	width: 160px;
+}
+
+#value {
+	width: 80px;
+}
+
+.ruleField {
+	float: left;
+	padding-right: 10px;
+}
+
+#text {
+	width: 300px;
+}
+
+#ruleInput {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 20px;
+}
+
+#units-container {
+	padding-bottom: 20px;
+}
+
+#rules-container {
+	padding-bottom: 20px;
+}
+
+#json-container {
+	padding-top: 30px;
+}
