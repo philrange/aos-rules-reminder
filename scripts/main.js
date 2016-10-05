@@ -192,7 +192,7 @@ function buildRuleHtml(phase, rule) {
     var html = "";
 
     var checkBoxDiv = "<div class='checkbox-container'><input type='checkbox' class='checkbox' value='" + phase + "' id='checkbox-" + rule.id + "'></div>";
-    var type = getTypeClass(rule.type);
+    var type = getTypeClass(rule.type, rule.iconText);
     var iconText = rule.iconText != null ? rule.iconText.toUpperCase() : "";
     var iconDiv = `<div class='icon rounded-corners ` + type.class + `'>
     <div class='icon-img'>` + type.text + `</div>
@@ -210,10 +210,12 @@ function buildRuleHtml(phase, rule) {
     html += ruleNameDiv;
     html += textDiv + "</div>";
 
+console.log(html);
     return html;
 }
 
-function getTypeClass(type) {
+function getTypeClass(type, value) {
+    console.log(value);
     var typeValues = [];
     typeValues.text = "&nbsp;";
     if (type.toLowerCase() == "buff") {
@@ -228,7 +230,11 @@ function getTypeClass(type) {
     } else if (type.toLowerCase() == "save") {
         typeValues.class = "save";
     } else {
-        typeValues.class = "other";
+        if (value == null || value == "") {
+            typeValues.class = "other-empty";
+        } else {
+            typeValues.class = "other";
+        }
     }
 
     return typeValues;

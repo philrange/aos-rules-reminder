@@ -102,6 +102,10 @@ body {
 }
 
 .other {
+	background: #eee;
+}
+
+.other-empty {
 	display : none;
 }
 
@@ -131,6 +135,9 @@ body {
 	background-image: url("../images/shield.png");
 }
 
+.other .icon-img {
+	width: 1px;
+}
 
 .icon-text {
 	font-weight: bold;
