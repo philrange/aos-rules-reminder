@@ -62,7 +62,13 @@ function clearRules() {
     missing = new Set()
     ruleId = 1;
     //todo
-    // heroRules = [];
+    deploymentRules = [];
+    heroRules = [];
+    movementRules = [];
+    shootingRules = [];
+    chargeRules = [];
+    combatRules = [];
+    battleshockRules = [];
 }
 
 function toggleText() {
