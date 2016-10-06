@@ -1,3 +1,6 @@
 
 
-{"Liberators":{"rules":[{"phase":"COMBAT","type":"BUFF","value":"to hit","name":"Lay Low the Tyrants","text":"Add 1 to all hit roles for liberator models attacking models with wounds of 5 or more"},{"phase":"COMBAT","type":"REROLL","value":"save","name":"Sigmarite Shields","text":"Reroll any saves of 1 for units with sigmarite shields"},{"phase":"COMBAT","type":"BUFF","value":"attack","name":"Liberator Prime","text":"3 attacks rather than 2"}]}}
+{"Liberators":{"rules":[{"phase":"COMBAT","type":"BUFF","value":"to hit","name":"Lay Low the Tyrants","text":"Add 1 to all hit roles for liberator models attacking models with wounds of 5 or more"},
+	{"phase":"COMBAT", "type":"REROLL","value":"save","name":"Sigmarite Shields","text":"Reroll any saves of 1 for units with sigmarite shields"},
+	{"phase":"SHOOTING", "type":"REROLL","value":"save","name":"Sigmarite Shields","text":"Reroll any saves of 1 for units with sigmarite shields"},
+	{"phase":"COMBAT","type":"BUFF","value":"attack","name":"Liberator Prime","text":"3 attacks rather than 2"}]}}
