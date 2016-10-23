@@ -1,4 +1,5 @@
 
+var anyRules = [];
 var deploymentRules = [];
 var heroRules = [];
 var movementRules = [];
@@ -9,6 +10,15 @@ var battleshockRules = [];
 var missing = new Set();
 var ruleId = 1;
 
+
+function loadArmyFromURL() {
+    var army = window.location.search.substring(1);
+    if ("" !== army) {
+        
+        toggleText();
+        displayJson(army);
+    }
+}
 
 function go() {
     toggleText();
@@ -61,7 +71,7 @@ function clearRules() {
     $('#debug').empty();
     missing = new Set()
     ruleId = 1;
-    //todo
+    anyRules = [];
     deploymentRules = [];
     heroRules = [];
     movementRules = [];
@@ -105,6 +115,7 @@ function createRules(armyListData) {
 
                 //add rules to page
                 $("#rules").empty();
+                $("#rules").append(buildSectionHtml("Any", anyRules));
                 $("#rules").append(buildSectionHtml("Deployment", deploymentRules));
                 $("#rules").append(buildSectionHtml("Hero", heroRules));
                 $("#rules").append(buildSectionHtml("Movement", movementRules));
@@ -172,7 +183,12 @@ function buildRulesForUnit(t, unit, ruleData) {
 }
 
 function addToPhaseRules(phase, id, fullRule) {
-    eval(phase.toLowerCase() + 'Rules')[id] = fullRule;
+	if (phase == null || phase == "") {
+		phaseName = "any";
+	} else {
+		phaseName = phase.toLowerCase();
+	}
+    eval(phaseName + 'Rules')[id] = fullRule;
 }
 
 function buildSectionHtml(phase, rules) {
