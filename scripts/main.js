@@ -48,6 +48,7 @@ function displayPrintable() {
 
     $("#printableRules").empty();
     $("#printableRules").append("<div class='print'>");
+    $("#printableRules").append(buildSectionHtml("Any", filterRules(anyRules)));
     $("#printableRules").append(buildSectionHtml("Deployment", filterRules(deploymentRules)));
     $("#printableRules").append(buildSectionHtml("Hero", filterRules(heroRules)));
     $("#printableRules").append(buildSectionHtml("Movement", filterRules(movementRules)));
