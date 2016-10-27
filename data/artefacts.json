@@ -1,13 +1,12 @@
 {
   "order": {
-  "Inspiring": {
-	"phase": "HERO",
+  "Obstinate Blade": {
 	"type": "REROLL",
 	"value": "todo",
 	"text": "fill this in."
   },
   "Reckless": {
-	"phase": "HERO",
+	"phase": "COMBAT",
 	"type": "REROLL",
 	"value": "todo",
 	"text": "fill this in."
