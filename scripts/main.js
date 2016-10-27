@@ -7,6 +7,8 @@ var shootingRules = [];
 var chargeRules = [];
 var combatRules = [];
 var battleshockRules = [];
+var traits = {};
+var artefacts = {};
 var missing = new Set();
 var ruleId = 1;
 
@@ -89,13 +91,16 @@ function toggleText() {
 
 function displayJson (base64) {
 	
-	var json=JSON.parse(LZString.decompressFromEncodedURIComponent(base64))
+	var json=JSON.parse(LZString.decompressFromEncodedURIComponent(base64));
     // console.log(JSON.stringify(json));
 	createRules(json);
 }
 
 function createRules(armyListData) {
 // console.log(JSON.stringify(armyListData));
+
+    loadTraits();
+    loadArtefacts();
 
     $.each(armyListData,
         function (t, army) {
@@ -131,7 +136,7 @@ function createRules(armyListData) {
 
                 },
                 error: function (argument) {
-                    console.log(argument);
+                    // console.log(argument);
                     $("#debug").append("Error loading file for " + army.name + "<br>");
                 }  
             }); 
@@ -143,44 +148,139 @@ function createRules(armyListData) {
 
 function buildRules (ruleData, army) {
 
-    buildRulesForUnitType(ruleData, army.units);
-    buildRulesForUnitType(ruleData, army.heroes);
-    buildRulesForUnitType(ruleData, army.monsters);
-    buildRulesForUnitType(ruleData, army.warmachines);
-    buildRulesForUnitType(ruleData, army.battalions);
+    var faction = army.faction;
+
+    buildRulesForUnitType(ruleData, army.units, faction);
+    buildRulesForUnitType(ruleData, army.heroes, faction);
+    buildRulesForUnitType(ruleData, army.monsters, faction);
+    buildRulesForUnitType(ruleData, army.warmachines, faction);
+    buildRulesForUnitType(ruleData, army.battalions, faction);
 }
 
-function buildRulesForUnitType (ruleData, unitList) {
+function buildRulesForUnitType (ruleData, unitList, faction) {
     var unitsAlreadyDone = new Set();
    $.each(unitList, function (t, unit) {
         if (!unitsAlreadyDone.has(unit.name)) {
-            buildRulesForUnit(t, unit, ruleData);
+            buildRulesForUnit(t, unit, ruleData, faction);
             unitsAlreadyDone.add(unit.name);
         };
     });
 }
 
-function buildRulesForUnit(t, unit, ruleData) {
+function buildRulesForUnit(t, unit, ruleData, faction) {
     var unitRules = ruleData[unit.name];
     var rulesForUnitType = "";
     if (unitRules == null) {
         missing.add(unit);
     } else {
+        var isGeneral = unit.general != null && unit.general == "Yes";
+
+        //get basic rules
         $.each(unitRules.rules, 
             function (t, rule) {
 
                 var id = ruleId++;
                 var fullRule = {enabled : true, id : id, type : rule.type, iconText : rule.value, unitName : unit.name, ruleName : rule.name, description : rule.text};
+                if (rule.commandAbility && !isGeneral) {
+                    // console.log("command rule doesn't apply");
+                    return;
+                };
+
+                //also filter rules that rely on equipment
+                // console.log(unit.name + " equipped with " + unit.equip);
+                    
+                //if not filtered out, add the rule to the list
                 addToPhaseRules(rule.phase, id, fullRule);
+
             }
         );
 
-        // can add general/artifact etc rules here too
-        console.log(unit.general != null ? "general: " + unit.general : "general not set")
+        // add general command trait
+        var commandTrait = unit.commandTrait;
+        if (isGeneral && commandTrait != null && commandTrait != "None") {
+
+//            console.log("Get general's command trait for faction " + faction + ", trait " + unit.commandTrait + " " + unit.name);
+            var rule = getGeneralTraitRule(commandTrait, faction);
+            if (rule != null) {
+                var id = ruleId++;
+                var fullRule = {enabled : true, id : id, type : rule.type, iconText : rule.value, unitName : unit.name, ruleName : commandTrait, description : rule.text};
+
+                //todo
+//                addToPhaseRules(rule.phase, id, fullRule);
+            }
+        };
+
+        //add artefact rule
+        var artefact = unit.artefact;
+        if (artefact != null && artefact != "None") {
+
+//            console.log("Get artefact for faction " + faction + ", artefact " + artefact + " " + unit.name);
+            var rule = getArtefactRule(artefact, faction);
+            if (rule != null) {
+                var id = ruleId++;
+                var fullRule = {enabled : true, id : id, type : rule.type, iconText : rule.value, unitName : unit.name, ruleName : artefact, description : rule.text};
+
+                //todo
+//                addToPhaseRules(rule.phase, id, fullRule);
+            }
+        };
+
+
     }
 
     // console.log(rulesForUnitType);
     return rulesForUnitType;
+}
+
+function loadTraits() {
+        $.ajax({
+                   type: "GET",
+                   crossDomain:true,
+                   cache: false,
+                   url: "data/traits.json",
+                   success: function (t) {
+//                      console.log(t);
+                        traits = t;
+                    },
+                    error: function (argument) {
+                         console.log(argument);
+                        $("#debug").append("Error loading traits file <br>");
+                    }
+                });
+
+}
+
+function getGeneralTraitRule(trait, faction) {
+
+    var factionTraits = traits[faction];
+    var traitRule = factionTraits[trait];
+
+    return traitRule;
+}
+
+function loadArtefacts() {
+        $.ajax({
+                   type: "GET",
+                   crossDomain:true,
+                   cache: false,
+                   url: "data/artefacts.json",
+                   success: function (a) {
+//                      console.log(a);
+                        artefacts = a;
+                    },
+                    error: function (argument) {
+                         console.log(argument);
+                        $("#debug").append("Error loading artefacts file <br>");
+                    }
+                });
+}
+
+function getArtefactRule(artefact, faction) {
+
+    var factionArtefacts = artefacts[faction];
+    var artefactRule = factionArtefacts[artefact];
+
+    return artefactRule;
 }
 
 function addToPhaseRules(phase, id, fullRule) {
@@ -233,12 +333,12 @@ function buildRuleHtml(phase, rule) {
     html += ruleNameDiv;
     html += textDiv + "</div>";
 
-console.log(html);
+    // console.log(html);
     return html;
 }
 
 function getTypeClass(type, value) {
-    console.log(value);
+    // console.log(value);
     var typeValues = [];
     typeValues.text = "&nbsp;";
     if (type.toLowerCase() == "buff") {
@@ -282,7 +382,6 @@ function addListeners() {
 
         var phase = this.value;
     if(this.checked) {
-        //todo
         toggleRule(phase, id, false);
         element.fadeTo(200,0.2);
 
