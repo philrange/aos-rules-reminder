@@ -1,0 +1,11 @@
+{
+
+	"order" : { "rules" : [ 
+		{ "phase" : "HERO", "type" : "REROLL", "value" : "save", "name" : "Inspiring", "text" : "fill this in."}
+		{ "phase" : "COMBAT", "type" : "REROLL", "value" : "save", "name" : "Reckless", "text" : "fill this in."}
+	]}
+
+
+
+
+}
