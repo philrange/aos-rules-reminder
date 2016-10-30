@@ -155,6 +155,7 @@ function buildRules (ruleData, army) {
     buildRulesForUnitType(ruleData, army.monsters, faction);
     buildRulesForUnitType(ruleData, army.warmachines, faction);
     buildRulesForUnitType(ruleData, army.battalions, faction);
+    buildRulesForUnitType(ruleData, army.formations, faction);
 }
 
 function buildRulesForUnitType (ruleData, unitList, faction) {

@@ -292,7 +292,24 @@
         "type": "OTHER",
         "value": "heal wound",
         "name": "Engineer",
-        "text": " In your hero phase, a Dwarf Engineer can repair a single <span class='keyword'>War Machine</span> within 4\". That model repairs 1 wound."
+        "text": "In your hero phase, a Dwarf Engineer can repair a single <span class='keyword'>War Machine</span> within 4\". That model repairs 1 wound."
+      }
+    ]
+  },
+  "Grudgebound War Throng": {
+    "rules": [
+      {
+        "type": "REROLL",
+        "value": "1s to hit",
+        "name": "Ancient Grudges",
+        "text": "Reroll all hit rolls of 1"
+      },      
+      {
+        "phase": "BATTLESHOCK",
+        "type": "OTHER",
+        "value": "",
+        "name": "Ancient Grudges",
+        "text": "If you roll a 1, 2 or 3 for a battleshock test, the unit passes."
       }
     ]
   }
