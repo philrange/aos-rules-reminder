@@ -1,16 +1,39 @@
 {
   "order": {
-  "Inspiring": {
+
+  "Strategic Genius": {
 	"phase": "HERO",
+	"type": "OTHER",
+	"value": "",
+	"text": "Once per battle, your general can use two different comman abilities in the same hero phase, or can use the Inspiring Presence command ability twice in the same hero phase."
+  },  
+  "Inspiring": {
+	"phase": "BATTLESHOCK",
 	"type": "REROLL",
-	"value": "todo",
-	"text": "fill this in."
+	"value": "battleshock",
+	"text": "You can re=roll battleshock tests for friendly <span class='keyword'>Order</span> units that are within 24\" of your general, rather than only 12\"."
   },
   "Reckless": {
-	"phase": "HERO",
+	"phase": "CHARGE",
 	"type": "REROLL",
-	"value": "todo",
+	"value": "run and charge",
 	"text": "fill this in."
+  },
+    "Tenacious": {
+	"type": "BUFF",
+	"value": "wound",
+	"text": "Add 1 to your general's Wounds characteristic."
+  },  
+    "Legendary Fighter": {
+	"phase": "COMBAT",
+	"type": "BUFF",
+	"value": "attack",
+	"text": "fill this in"
+  },  
+    "Master of Defence": {
+	"type": "SAVE",
+	"value": "6+",
+	"text": "fill this in"
   }
 }
 

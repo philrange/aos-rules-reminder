@@ -1,15 +1,40 @@
 {
   "order": {
+  "Quicksilver Potion": {
+	"phase": "COMBAT",
+	"type": "OTHER",
+	"value": "",
+	"text": "fill this in."
+  },  
   "Obstinate Blade": {
-	"type": "REROLL",
-	"value": "todo",
+	"phase": "COMBAT",
+	"type": "BUFF",
+	"value": "rend",
 	"text": "fill this in."
   },
-  "Reckless": {
+  "Relic Blade": {
 	"phase": "COMBAT",
-	"type": "REROLL",
-	"value": "todo",
+	"type": "BUFF",
+	"value": "damage",
 	"text": "fill this in."
+  },
+  "Hoarfrost": {
+	"phase": "COMBAT",
+	"type": "OTHER",
+	"value": "",
+	"text": "fill this in."
+  },
+  "Talisman of Blinding Light": {
+	"phase": "COMBAT",
+	"type": "DEBUFF",
+	"value": "to hit",
+	"text": "fill this in."
+  },
+  "": {
+	"phase": "HERO",
+	"type": "OTHER",
+	"value": "heal wound",
+	"text": "You can heal 1 wound suffered by this model in each of your hero phases."
   }
 }
 
