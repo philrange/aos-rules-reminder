@@ -300,7 +300,7 @@
     "rules": [
       {
         "type": "REROLL",
-        "value": "1s to hit",
+        "value": "1 to hit",
         "name": "Ancient Grudges",
         "text": "Reroll all hit rolls of 1"
       },      
@@ -308,7 +308,24 @@
         "phase": "BATTLESHOCK",
         "type": "OTHER",
         "value": "",
+        "name": "Stubborn to the End",
+        "text": "If you roll a 1, 2 or 3 for a battleshock test, the unit passes."
+      }
+    ]
+  },
+    "Dispossessed Clan Throng": {
+    "rules": [
+      {
+        "type": "REROLL",
+        "value": "1 to hit",
         "name": "Ancient Grudges",
+        "text": "Reroll all hit rolls of 1"
+      },      
+      {
+        "phase": "BATTLESHOCK",
+        "type": "OTHER",
+        "value": "",
+        "name": "Stubborn to the End",
         "text": "If you roll a 1, 2 or 3 for a battleshock test, the unit passes."
       }
     ]
