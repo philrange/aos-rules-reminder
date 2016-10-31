@@ -1,0 +1,6 @@
+{
+
+	"Pink Horrors Of Tzeentch":{"rules":[{"phase":"SHOOTING","type":"BUFF","value":"to hit","name":"Flickering Flames","text":"You can add 1 to hit rolls made for a Pink Horror’s Magical Flames attack if its unit contains 20 or more models."},
+		{"phase":"HERO","type":"BUFF","value":"to cast","name":"Locus of Conjuration","text":"You can add 1 to any casting rolls made for this unit if it is within 9\" of any Horror Heroes from your army."}
+	]}
+}
