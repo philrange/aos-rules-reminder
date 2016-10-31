@@ -1,0 +1,23 @@
+
+{
+	"Great Eagles":{"rules":[
+		{"phase":"COMBAT","type":"OTHER","value":"+2 attacks","name":"Death from the Skies","text":"Great Eagle makes 6 Attacks rather than 4 if it charged in the same turn."},
+		{"phase":"COMBAT","type":"OTHER","value":"","name":"Soar Away","text":"At the end of the combat phase, Great Eagles can retreat from close combat and soar away if there are any enemy models within 3\" of their unit. If they do, roll three dice; the total scored is how far you can move the Great Eagles when they retreat. The Great Eagles must end this movement more than 3\" from any enemy units – if they can’t move far enough then they do not retreat."}
+	]},
+	"Silver Helms":{"rules":[{"phase":"","type":"REROLL","value":"save","name":"Elven Shield","text":"You can re-roll save rolls of 1 for a unit with Elven Shields. You can instead re-roll failed save rolls of 1 or 2 for this unit in the shooting phase."},
+		{"phase":"COMBAT","type":"BUFF","value":"wound & damage","name":"Lance Charge","text":"Add 1 to the wound rolls and Damage of this unit’s Ithilmar Lances and Swords if it charged in the same turn."},
+		{"phase":"COMBAT","type":"BUFF","value":"to hit","name":"Knights of Ulthuan","text":"You can add 1 to all hit rolls for this unit’s Lances and Swords if it has 10 or more models."}
+	]},
+	"High Elf Archers":{"rules":[{"phase":"SHOOTING","type":"BUFF","value":"to hit","name":"Elven Archery","text":"You can add 1 to hit rolls for a High Elf Archer in the shooting phase if its unit has 20 or more models and there are no enemy models within 3\"."},
+		{"phase":"SHOOTING","type":"OTHER","value":"","name":"Storm of Arrows","text":"Once per battle, this unit can shoot a Storm of Arrows in their shooting phase; when they do so you can double the number of attacks made by their Silverwood Longbows. This unit cannot shoot a Storm of Arrows if there are any enemy models within 3\"."}
+	]},
+	"High Elf Spearmen":{"rules":[{"phase":"","type":"REROLL","value":"save","name":"Elven Shield","text":"You can re-roll save rolls of 1 for a unit with Elven Shields. You can instead re-roll failed save rolls of 1 or 2 for this unit in the shooting phase."},
+		{"phase":"COMBAT","type":"BUFF","value":"attack","name":"Militia","text":"High Elf Spearmen make 1 extra attack if their unit has 20 or more models."},
+		{"phase":"COMBAT","type":"REROLL","value":"to hit","name":"Spear Phalanx","text":"You can re-roll hit rolls of 1 for a High Elf Spearman if it did not move in its preceding Movement phase."}
+	]},
+	"High Elf Repeater Bolt Thrower":{},
+	"Teclis":{"rules":[{"phase":"HERO","type":"OTHER","value":"","name":"Blessings of Lileath","text":"You can add 2 to casting and unbinding rolls for Teclis."},
+		{"phase":"HERO","type":"OTHER","value":"","name":"War Crown of Saphery","text":"If, when Teclis attempts to cast a spell, the casting roll is at least 3 more than that spell’s casting value, that spell’s range is doubled."},
+		{"phase":"HERO","type":"OTHER","value":"spell","name":"Tempest","text":"Without warning, Teclis summons an eight-winded storm to break about the foe. Tempest has a casting value of 5. If successfully cast, select a visible unit within 18\". That unit suffers a mortal wound and must halve the distance its models move, run and charge until your next hero phase."}
+	]}
+}
