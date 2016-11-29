@@ -17,7 +17,7 @@
 	"phase": "CHARGE",
 	"type": "REROLL",
 	"value": "run and charge",
-	"text": "fill this in."
+	"text": "You can re-roll run and charge rolls for your general, and all friendly <span class='keyword'>Order</span> units within 10\" of your general."
   },
     "Tenacious": {
 	"type": "BUFF",

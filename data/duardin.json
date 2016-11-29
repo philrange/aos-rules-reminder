@@ -328,6 +328,15 @@
         "name": "Stubborn to the End",
         "text": "If you roll a 1, 2 or 3 for a battleshock test, the unit passes."
       }
+  ]
+  },
+  "Ungrim Ironfist The Slayer King": { 
+    "rules": [
+      {
+      "phase":"COMBAT","type":"BUFF","value":"to wound","name":"Slayer Oath","text":"You can add 1 to any wound rolls for Ungrim Ironfist if the target of the attack has more than 1 Wound."},
+      {"phase":"COMBAT","type":"OTHER","value":"","name":"A Mighty Death","text":"If Ungrim Ironfist is slain in the combat phase, roll a dice before he is removed. On a roll of 4 or more, you can inflict D6 mortal wounds on the enemy unit that struck the fatal blow."},
+      {"phase":"","type":"SAVE","value":"6+","name":"Dragon Cloak of Fyrskar","text":"Roll a dice each time Ungrim Ironfist suffers a wound or a mortal wound. On a 6 that wound or mortal wound is deflected by the Dragon Cloak of Fyrskar and is ignored."},
+      {"phase":"HERO","type":"BUFF","value":"to HIT & WOUND","name":"The Slayer King","text":"If Ungrim Ironfist uses this ability, pick one <span class='keyword'>Dispossessed</span> unit within 16\". Until your next hero phase, you can add 1 to all hit and wound rolls for that unit in the combat phase."}
     ]
   }
 }

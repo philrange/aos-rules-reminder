@@ -4,7 +4,7 @@
 	"phase": "COMBAT",
 	"type": "OTHER",
 	"value": "",
-	"text": "fill this in."
+	"text": "Attack first"
   },  
   "Obstinate Blade": {
 	"phase": "COMBAT",
@@ -30,7 +30,7 @@
 	"value": "to hit",
 	"text": "fill this in."
   },
-  "": {
+  "Phoenix Stone": {
 	"phase": "HERO",
 	"type": "OTHER",
 	"value": "heal wound",
