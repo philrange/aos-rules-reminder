@@ -1,6 +1,18 @@
 
 
-{"Liberators":{"rules":[{"phase":"COMBAT","type":"BUFF","value":"to hit","name":"Lay Low the Tyrants","text":"Add 1 to all hit roles for liberator models attacking models with wounds of 5 or more"},
-	{"phase":"COMBAT", "type":"REROLL","value":"save","name":"Sigmarite Shields","text":"Reroll any saves of 1 for units with sigmarite shields"},
-	{"phase":"SHOOTING", "type":"REROLL","value":"save","name":"Sigmarite Shields","text":"Reroll any saves of 1 for units with sigmarite shields"},
-	{"phase":"COMBAT","type":"BUFF","value":"attack","name":"Liberator Prime","text":"3 attacks rather than 2"}]}}
+{
+
+	"Liberators":{"rules":[
+		{"phase":"COMBAT","type":"BUFF","value":"to hit","name":"Lay Low the Tyrants","text":"Add 1 to all hit roles for liberator models attacking models with wounds of 5 or more"},
+		{"phase":"COMBAT", "type":"REROLL","value":"save","name":"Sigmarite Shields","text":"Reroll any saves of 1 for units with sigmarite shields"},
+		{"phase":"SHOOTING", "type":"REROLL","value":"save","name":"Sigmarite Shields","text":"Reroll any saves of 1 for units with sigmarite shields"},
+		{"phase":"COMBAT","type":"BUFF","value":"attack","name":"Liberator Prime","text":"3 attacks rather than 2"}
+	]},
+	"Judicators":{"rules":[
+		{"phase":"SHOOTING","type":"BUFF","value":"attacks","name":"Rapid Fire","text":"If a unit of Judicators does not move in the movement phase, then you can add 1 to the Attacks characteristic of any Boltstorm Crossbows the unit uses in the shooting phase of the same turn."},
+		{"phase":"SHOOTING","type":"OTHER","value":"D6 wounds","name":"Chained Lightning","text":"If a Judicator attacking with a Shockbolt Bow scores a hit then the bolt explodes into a storm of lightning. Instead of making a single wound roll, roll a dice and make a number of wound rolls equal to the number scored."},
+		{"phase":"SHOOTING","type":"REROLL","value":"to hit","name":"Eternal Judgement","text":"You may re-roll any hit rolls of 1 when a Judicator attacks a Chaos unit in the shooting phase."},
+		{"phase":"SHOOTING","type":"OTHER","value":"","name":"Thunderbolt Crossbow","text":"When a model attacks with a Thunderbolt Crossbow the target is struck by a mighty blast of Celestial energy; pick an enemy unit within 18* and roll a dice. Subtract 1 from the roll if the target is a Monster. If the result is equal to or less than the number of models in the unit, the unit suffers D3 mortal wounds."}
+	]}
+
+}
